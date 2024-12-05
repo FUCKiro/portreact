@@ -1,4 +1,3 @@
-import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useRef, useState } from "react";
 
@@ -9,7 +8,7 @@ import { Alert, Loader } from "../components";
 const Contact = () => {
   const formRef = useRef();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const { alert, showAlert, hideAlert } = useAlert();
+  const { alert, showAlert } = useAlert();
   const [loading, setLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState("idle");
 
@@ -20,53 +19,42 @@ const Contact = () => {
   const handleFocus = () => setCurrentAnimation("walk");
   const handleBlur = () => setCurrentAnimation("idle");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setCurrentAnimation("hit");
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          user_name: form.name,
-          user_email: form.email,
-          message: form.message
+    try {
+      const response = await fetch("https://formspree.io/f/xzzbwdeg", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setLoading(false);
-          showAlert({
-            show: true,
-            text: "Grazie per il tuo messaggio! 😃",
-            type: "success",
-          });
-
-          setTimeout(() => {
-            hideAlert(false);
-            setCurrentAnimation("idle");
-            setForm({
-              name: "",
-              email: "",
-              message: "",
-            });
-          }, [3000]);
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-          setCurrentAnimation("idle");
-
+        body: JSON.stringify(form),
+      });
+      
+      if (response.ok) {
+        setLoading(false);
+        showAlert({
+          show: true,
+          text: "Grazie per il tuo messaggio! 😃",
+          type: "success",
+        });
+        setCurrentAnimation("idle");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Errore nell'invio del messaggio");
+      }
+    } catch (error) {
+      setLoading(false);
+      setCurrentAnimation("idle");
+      console.error(error);
           showAlert({
             show: true,
             text: "Non ho ricevuto il tuo messaggio 😢",
             type: "danger",
           });
-        }
-      );
+    }
   };
 
   return (
