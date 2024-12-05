@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <header className='header'>
       <NavLink to='/'>
-        <div className="text-2xl font-bold blue-gradient_text">FL</div>
+        <div className="text-4xl font-bold blue-gradient_text">FL</div>
       </NavLink>
       <nav className='flex text-lg gap-7 font-medium'>
         <NavLink to='/about' className={({ isActive }) => isActive ? "text-blue-600" : "text-black" }>

@@ -12,7 +12,7 @@ const About = () => {
   return (
     <section className='max-container'>
       <h1 className='head-text'>
-        Mi chiamo{" "}
+        Ciao, sono{" "}
         <span className='blue-gradient_text font-semibold drop-shadow'>
           Fabio
         </span>

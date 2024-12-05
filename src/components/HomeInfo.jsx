@@ -16,7 +16,7 @@ const HomeInfo = ({ currentStage }) => {
     return (
       <div className='info-box'>
         <p className='font-medium sm:text-xl text-center'>
-          Scopri di più su di me, sulla mia storia e sulla passione che mi guida nella creazione di soluzioni digitali su misura
+          Scopri la mia storia e la passione che guida le mie soluzioni digitali
         </p>
 
         <Link to='/about' className='neo-brutalism-white neo-btn'>
@@ -31,11 +31,11 @@ const HomeInfo = ({ currentStage }) => {
     return (
       <div className='info-box'>
         <p className='font-medium text-center sm:text-xl'>
-          Esplora i progetti che ho realizzato e scopri come trasformo le idee in soluzioni web innovative e funzionali
+          Offro servizi di sviluppo web personalizzato, creazione di e-commerce e soluzioni digitali su misura per ogni esigenza
         </p>
 
         <Link to='/projects' className='neo-brutalism-white neo-btn'>
-          Vedi i progetti
+          Esplora servizi
           <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
         </Link>
       </div>
