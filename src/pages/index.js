@@ -1,11 +1,11 @@
 import Home from "./Home";
-import About from './About'
-import Projects from "./Projects";
+import ChiSono from './ChiSono'
+import Servizi from "./Servizi";
 import Contact from "./Contact";
 
 export {
     Home,
-    About,
-    Projects,
+    ChiSono,
+    Servizi,
     Contact
 }

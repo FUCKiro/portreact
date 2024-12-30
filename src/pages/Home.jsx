@@ -64,7 +64,7 @@ const Home = () => {
       </div>
 
       <Canvas
-        className={`w-full h-screen bg-transparent relative ${
+        className={`w-full h-screen bg-transparent ${
           isRotating ? "cursor-grabbing" : "cursor-grab"
         }`}
         camera={{ near: 0.1, far: 1000 }}
@@ -104,12 +104,12 @@ const Home = () => {
         </Suspense>
       </Canvas>
 
-      <div className='absolute top-20 right-8'>
+      <div className='absolute bottom-2 left-2 z-10'>
         <img
           src={!isPlayingMusic ? soundoff : soundon}
           alt='jukebox'
           onClick={() => setIsPlayingMusic(!isPlayingMusic)}
-          className='w-10 h-10 cursor-pointer object-contain'
+          className='w-10 h-10 cursor-pointer object-contain mb-2'
         />
       </div>
     </section>

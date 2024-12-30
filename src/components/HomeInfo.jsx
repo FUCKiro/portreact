@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
-
+import { useLanguage } from "../contexts/LanguageContext";
+import { translations } from "../translations";
 import { arrow } from "../assets/icons";
 
 const HomeInfo = ({ currentStage }) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   if (currentStage === 1)
     return (
       <h1 className='sm:text-xl sm:leading-snug text-center neo-brutalism-blue py-4 px-8 text-white mx-5'>
-        Ciao sono Fabio
+        {t.home.stage1.title}
         <br />
-        Vieni a scoprire il mio mondo
+        {t.home.stage1.subtitle}
       </h1>
     );
 
@@ -16,11 +20,11 @@ const HomeInfo = ({ currentStage }) => {
     return (
       <div className='info-box'>
         <p className='font-medium sm:text-xl text-center'>
-          Scopri la mia storia e la passione che guida le mie soluzioni digitali
+          {t.home.stage2.text}
         </p>
 
-        <Link to='/about' className='neo-brutalism-white neo-btn'>
-          Scopri di più
+        <Link to='/chi-sono' className='neo-brutalism-white neo-btn'>
+          {t.home.stage2.cta}
           <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
         </Link>
       </div>
@@ -31,11 +35,11 @@ const HomeInfo = ({ currentStage }) => {
     return (
       <div className='info-box'>
         <p className='font-medium text-center sm:text-xl'>
-          Offro servizi di sviluppo web personalizzato, creazione di e-commerce e soluzioni digitali su misura per ogni esigenza
+          {t.home.stage3.text}
         </p>
 
         <Link to='/projects' className='neo-brutalism-white neo-btn'>
-          Esplora servizi
+          {t.home.stage3.cta}
           <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
         </Link>
       </div>
@@ -46,11 +50,11 @@ const HomeInfo = ({ currentStage }) => {
     return (
       <div className='info-box'>
       <p className='font-medium sm:text-xl text-center'>
-        Vuoi collaborare o hai un'idea da realizzare? Contattami e costruiremo insieme qualcosa di straordinario
+        {t.home.stage4.text}
       </p>
 
       <Link to='/contact' className='neo-brutalism-white neo-btn'>
-        Contattami
+        {t.home.stage4.cta}
         <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
       </Link>
     </div>

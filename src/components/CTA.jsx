@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translations } from "../translations";
 
 const CTA = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <section className='cta'>
       <p className='cta-text'>
-        Hai un progetto in mente? <br className='sm:block hidden' />
-        Realizziamolo insieme!
+        {t.cta.text} <br className='sm:block hidden' />
+        {t.cta.subtext}
       </p>
       <Link to='/contact' className='btn'>
-        Contattami
+        {t.cta.button}
       </Link>
     </section>
   );

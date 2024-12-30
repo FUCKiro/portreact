@@ -15,8 +15,16 @@ const Projects = () => {
       </h1>
 
       <p className='text-slate-500 mt-2 leading-relaxed'>
-        Mi occupo di progettazione web, ecommerce e sviluppo di siti
+        Offro una gamma completa di servizi web professionali:
       </p>
+      
+      <ul className='text-slate-500 mt-4 leading-relaxed list-disc pl-6'>
+        <li>Creazione di siti web personalizzati</li>
+        <li>Sviluppo di piattaforme e-commerce su misura</li>
+        <li>Restyling di siti web esistenti</li>
+        <li>Manutenzione e aggiornamento di siti</li>
+        <li>Consulenza per la strategia digitale e la presenza online</li>
+      </ul>
 
       <div className='flex flex-wrap my-20 gap-16'>
         {projects.map((project) => (
@@ -37,6 +45,21 @@ const Projects = () => {
                 {project.name}
               </h4>
               <p className='mt-2 text-slate-500'>{project.description}</p>
+              <div className='mt-5 flex items-center gap-2 font-poppins'>
+                <Link
+                  to={project.link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='font-semibold text-blue-600 cursor-not-allowed opacity-50'
+                >
+                  Progetti in arrivo
+                </Link>
+                <img
+                  src={arrow}
+                  alt='arrow'
+                  className='w-4 h-4 object-contain'
+                />
+              </div>
             </div>
           </div>
         ))}

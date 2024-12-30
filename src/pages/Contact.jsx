@@ -1,16 +1,21 @@
+import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useRef, useState } from "react";
 
 import { Fox } from "../models";
 import useAlert from "../hooks/useAlert";
 import { Alert, Loader } from "../components";
+import { useLanguage } from "../contexts/LanguageContext";
+import { translations } from "../translations";
 
 const Contact = () => {
   const formRef = useRef();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const { alert, showAlert } = useAlert();
+  const { alert, showAlert, hideAlert } = useAlert();
   const [loading, setLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState("idle");
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const handleChange = ({ target: { name, value } }) => {
     setForm({ ...form, [name]: value });
@@ -19,42 +24,55 @@ const Contact = () => {
   const handleFocus = () => setCurrentAnimation("walk");
   const handleBlur = () => setCurrentAnimation("idle");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     setCurrentAnimation("hit");
 
-    try {
-      const response = await fetch("https://formspree.io/f/xzzbwdeg", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    emailjs
+      .send(
+        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          to_name: "JavaScript Mastery",
+          from_email: form.email,
+          to_email: "sujata@jsmastery.pro",
+          message: form.message,
         },
-        body: JSON.stringify(form),
-      });
-      
-      if (response.ok) {
-        setLoading(false);
-        showAlert({
-          show: true,
-          text: "Grazie per il tuo messaggio! 😃",
-          type: "success",
-        });
-        setCurrentAnimation("idle");
-        setForm({ name: "", email: "", message: "" });
-      } else {
-        throw new Error("Errore nell'invio del messaggio");
-      }
-    } catch (error) {
-      setLoading(false);
-      setCurrentAnimation("idle");
-      console.error(error);
+        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        () => {
+          setLoading(false);
           showAlert({
             show: true,
-            text: "Non ho ricevuto il tuo messaggio 😢",
+            text: t.contact.alerts.success,
+            type: "success",
+          });
+
+          setTimeout(() => {
+            hideAlert(false);
+            setCurrentAnimation("idle");
+            setForm({
+              name: "",
+              email: "",
+              message: "",
+            });
+          }, [3000]);
+        },
+        (error) => {
+          setLoading(false);
+          console.error(error);
+          setCurrentAnimation("idle");
+
+          showAlert({
+            show: true,
+            text: t.contact.alerts.error,
             type: "danger",
           });
-    }
+        }
+      );
   };
 
   return (
@@ -62,7 +80,7 @@ const Contact = () => {
       {alert.show && <Alert {...alert} />}
 
       <div className='flex-1 min-w-[50%] flex flex-col'>
-        <h1 className='head-text'>Contattami</h1>
+        <h1 className='head-text'>{t.contact.title}</h1>
 
         <form
           ref={formRef}
@@ -70,12 +88,12 @@ const Contact = () => {
           className='w-full flex flex-col gap-7 mt-14'
         >
           <label className='text-black-500 font-semibold'>
-            Nome
+            {t.contact.form.name}
             <input
               type='text'
               name='name'
               className='input'
-              placeholder='Mario'
+              placeholder={t.contact.form.placeholder.name}
               required
               value={form.name}
               onChange={handleChange}
@@ -84,12 +102,12 @@ const Contact = () => {
             />
           </label>
           <label className='text-black-500 font-semibold'>
-            Email
+            {t.contact.form.email}
             <input
               type='email'
               name='email'
               className='input'
-              placeholder='mario@esempio.com'
+              placeholder={t.contact.form.placeholder.email}
               required
               value={form.email}
               onChange={handleChange}
@@ -98,12 +116,12 @@ const Contact = () => {
             />
           </label>
           <label className='text-black-500 font-semibold'>
-            Il tuo messaggio
+            {t.contact.form.message}
             <textarea
               name='message'
               rows='4'
               className='textarea'
-              placeholder='Scrivi il tuo messaggio qui...'
+              placeholder={t.contact.form.placeholder.message}
               value={form.message}
               onChange={handleChange}
               onFocus={handleFocus}
@@ -118,7 +136,7 @@ const Contact = () => {
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
-            {loading ? "Invio in corso..." : "Invia"}
+            {loading ? t.contact.form.sending : t.contact.form.submit}
           </button>
         </form>
       </div>

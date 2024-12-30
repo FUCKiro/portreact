@@ -10,7 +10,7 @@ import { translations } from "../translations";
 
 import "react-vertical-timeline-component/style.min.css";
 
-const About = () => {
+const ChiSono = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -118,4 +118,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default ChiSono;
