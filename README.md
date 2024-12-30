@@ -1,9 +1,68 @@
-# Build and Deploy an Amazing 3D Developer Portfolio in React with Three.js
+# Portfolio Website
 
-![3D Website](https://i.ibb.co/ryytGVx/Screenshot-2023-11-25-at-11-28-11-AM.png)
+A modern, interactive 3D portfolio website built with React, Three.js, and TailwindCSS. Features a bilingual interface (Italian/English) and engaging 3D animations.
 
-### [🌟 Become a top 1% Next.js 14 developer in only one course](https://jsmastery.pro/next14)
-### [🚀 Land your dream programming job in 6 months](https://jsmastery.pro/masterclass)
-### [📙 Free Three.js Cheatsheet](https://resource.jsmastery.pro/threejs-cheatsheet)
-### [🌐 Best Hosting for Your Websites](https://hostinger.com/javascript10)
+![Portfolio Preview](https://i.ibb.co/ryytGVx/Screenshot-2023-11-25-at-11-28-11-AM.png)
 
+## Features
+
+- 🌐 Bilingual support (Italian/English)
+- 🎨 Interactive 3D elements using Three.js
+- 📱 Fully responsive design
+- ⚡ Built with Vite for optimal performance
+- 🎵 Background music toggle
+- 📧 Contact form integration
+- 🌓 Modern UI with TailwindCSS
+
+## Tech Stack
+
+- React
+- Three.js (@react-three/fiber & @react-three/drei)
+- TailwindCSS
+- EmailJS for contact form
+- React Router for navigation
+- Vite for build tooling
+
+## Getting Started
+
+1. Clone the repository
+```bash
+git clone [repository-url]
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Start the development server
+```bash
+npm run dev
+```
+
+4. Build for production
+```bash
+npm run build
+```
+
+## Project Structure
+
+```
+src/
+├── assets/        # Static assets (3D models, images, icons)
+├── components/    # Reusable React components
+├── contexts/      # React contexts (language)
+├── models/        # 3D model components
+├── pages/         # Page components
+├── constants/     # Configuration and constants
+├── translations/  # Language translations
+└── hooks/         # Custom React hooks
+```
+
+## Deployment
+
+The site is configured for deployment on Netlify with automatic redirects and GitHub integration.
+
+## License
+
+MIT License - feel free to use this code for your own projects!
