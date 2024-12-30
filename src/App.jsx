@@ -2,7 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import { Footer, Navbar } from "./components";
 import { LanguageProvider } from "./contexts/LanguageContext";
-import { ChiSono, Contact, Home, Servizi } from "./pages";
+import { ChiSono, Contact, Home, Servizi, NotFound } from "./pages";
 
 const App = () => {
   return (
@@ -20,6 +20,7 @@ const App = () => {
                     <Route path='/chi-sono' element={<ChiSono />} />
                     <Route path='/servizi' element={<Servizi />} />
                     <Route path='/contact' element={<Contact />} />
+                    <Route path='*' element={<NotFound />} />
                   </Routes>
                   <Footer />
                 </>
