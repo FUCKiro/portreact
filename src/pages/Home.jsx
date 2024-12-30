@@ -104,12 +104,12 @@ const Home = () => {
         </Suspense>
       </Canvas>
 
-      <div className='absolute bottom-2 left-2 z-10'>
+      <div className='fixed bottom-[20px] left-[20px] z-[1000]'>
         <img
           src={!isPlayingMusic ? soundoff : soundon}
           alt='jukebox'
           onClick={() => setIsPlayingMusic(!isPlayingMusic)}
-          className='w-10 h-10 cursor-pointer object-contain mb-2'
+          className='w-12 h-12 cursor-pointer object-contain'
         />
       </div>
     </section>

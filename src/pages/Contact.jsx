@@ -29,21 +29,16 @@ const Contact = () => {
     setLoading(true);
     setCurrentAnimation("hit");
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "JavaScript Mastery",
-          from_email: form.email,
-          to_email: "sujata@jsmastery.pro",
-          message: form.message,
-        },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
+    fetch("https://formspree.io/f/xzzbwdeg", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    })
       .then(
-        () => {
+        (response) => {
+          if (!response.ok) throw new Error('Network response was not ok');
           setLoading(false);
           showAlert({
             show: true,
@@ -85,6 +80,8 @@ const Contact = () => {
         <form
           ref={formRef}
           onSubmit={handleSubmit}
+          action="https://formspree.io/f/xzzbwdeg"
+          method="POST"
           className='w-full flex flex-col gap-7 mt-14'
         >
           <label className='text-black-500 font-semibold'>
